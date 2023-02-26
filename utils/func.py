@@ -35,7 +35,7 @@ def get_last_date(data, count_lasts):
     :param count_lasts: количество вывода данных
     :return: вывод последних 5 (или другого количества) операций
     """
-    data = sorted(data, key=lambda x: x['data'], reverse=True)
+    data = sorted(data, key=lambda x: x['date'], reverse=True)
     return data[:count_lasts]
 
 
@@ -48,7 +48,7 @@ def get_formatted(data: json) -> list:
     formatted_data = []
     for i in data:
         date = datetime.strptime(i["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
-        descriptions = i['descriptions']
+        descriptions = i['description']
 
         from_ = i['from'].split()
         from_number = from_.pop(-1)
