@@ -24,3 +24,13 @@ def get_filtered(data):
     data = [x for x in data if "state" in x and x["state"] == "EXECUTED"]
     return data
 
+
+def get_last_date(data, count_lasts):
+    """
+    Сортировка данных по дате и получение последних пяти (или другого заданного количества)
+    :param data: данные
+    :param count_lasts: количество вывода данных
+    :return: вывод последних 5 (или другого количества) операций
+    """
+    data = sorted(data, key=lambda x: x['data'], reverse=True)
+    return data[:count_lasts]
