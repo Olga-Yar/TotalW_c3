@@ -15,13 +15,16 @@ def get_data(url):
     return None, f'Ошибка при получении данных'
 
 
-def get_filtered(data):
+def get_filtered(data, filtered_empty_from=False):
     """
     Фильтрация списка, если значение state == executed
+    :param filtered_empty_from: если в списке данных нет параметра from
     :param data: данные
     :return: отфильтрованные данные по статусу операции - одобрена
     """
     data = [x for x in data if "state" in x and x["state"] == "EXECUTED"]
+    if filtered_empty_from:
+        data = [x for x in data if 'from' in x]
     return data
 
 
