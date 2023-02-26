@@ -34,3 +34,30 @@ def get_last_date(data, count_lasts):
     """
     data = sorted(data, key=lambda x: x['data'], reverse=True)
     return data[:count_lasts]
+
+
+def get_formatted(data: json) -> list:
+    """
+    Возвращает отформатированный список
+    :param data: данные
+    :return: заданный формат вывода по операции
+    """
+    formatted_data = []
+    for i in data:
+        date = datetime.strptime(i["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
+        descriptions = i['descriptions']
+
+        from_ = i['from'].split()
+        from_number = from_.pop(-1)
+        from_number = f'{from_number[:4]} {from_number[4:6]}** **** {from_number[-4:]}'
+        from_info = ' '.join(from_)
+
+        to_ = f'**{i["to"][:4]}'
+        amount = f'{i["operationAmount"]["amount"]} {i["operationAmount"]["currency"]["name"]}'
+        formatted_data.append(f"""\
+{date} {descriptions}
+{from_info} {from_number} -> {to_}
+{amount}
+""")
+        return formatted_data
+
