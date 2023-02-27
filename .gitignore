@@ -5,3 +5,7 @@ venv/
 /debug.log
 *.pyc
 *.log
+.DS_Store
+.coverage
+tests/.DS_Store
+utils/.DS_Store
