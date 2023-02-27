@@ -50,10 +50,14 @@ def get_formatted(data: json) -> list:
         date = datetime.strptime(i["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
         descriptions = i['description']
 
-        from_ = i['from'].split()
-        from_number = from_.pop(-1)
-        from_number = f'{from_number[:4]} {from_number[4:6]}** **** {from_number[-4:]}'
-        from_info = ' '.join(from_)
+        if 'from' in i:
+            from_ = i['from'].split()
+            from_number = from_.pop(-1)
+            from_number = f'{from_number[:4]} {from_number[4:6]}** **** {from_number[-4:]}'
+            from_info = ' '.join(from_)
+        else:
+            from_number = ''
+            from_info = 'Данные скрыты'
 
         to_ = f'**{i["to"][:4]}'
         amount = f'{i["operationAmount"]["amount"]} {i["operationAmount"]["currency"]["name"]}'
