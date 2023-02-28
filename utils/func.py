@@ -22,10 +22,13 @@ def get_filtered(data, filtered_empty_from=False):
     :param data: данные
     :return: отфильтрованные данные по статусу операции - одобрена
     """
-    data = [x for x in data if "state" in x and x["state"] == "EXECUTED"]
-    if filtered_empty_from:
-        data = [x for x in data if 'from' in x]
-    return data
+    for item in data:
+        if not item:
+            continue
+        data = [x for x in data if "state" in x and x["state"] == "EXECUTED"]
+        if filtered_empty_from:
+            data = [x for x in data if 'from' in x]
+        return data
 
 
 def get_last_date(data, count_lasts):
