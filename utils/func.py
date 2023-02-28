@@ -69,5 +69,5 @@ def get_formatted(data: json) -> list:
 {from_info} {from_number} -> {to_}
 {amount}
 """)
-        return formatted_data
+    return formatted_data
 
