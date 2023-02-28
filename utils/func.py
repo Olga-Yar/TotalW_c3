@@ -12,7 +12,7 @@ def get_data(url):
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
-    return None, f'Ошибка при получении данных'
+    return None, f'Ошибка при получении данных {response.status_code}'
 
 
 def get_filtered(data, filtered_empty_from=False):
